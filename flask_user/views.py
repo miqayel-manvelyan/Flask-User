@@ -266,9 +266,12 @@ def login():
                 user, user_email = user_manager.find_user_by_email(login_form.username.data)
         else:
             # Find user by email (with form.email)
-            user, user_email = user_manager.find_user_by_email(login_form.email.data)
+            user, user_email = user_manager.find_user_by_email(login_form.email.data)            
 
         if user:
+            if user.statuss == '4':
+                flash('User banned!','error')
+                return redirect(safe_next)
             # Log user in
             safe_next = user_manager.make_safe_url_function(login_form.next.data)
             return _do_login_user(user, safe_next, login_form.remember_me.data)
