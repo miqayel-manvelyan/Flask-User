@@ -269,7 +269,7 @@ def login():
             user, user_email = user_manager.find_user_by_email(login_form.email.data)            
 
         if user:
-            if user.statuss == '4':
+            if user.status == '4':
                 flash('User banned!','error')
                 return redirect(safe_next)
             # Log user in
